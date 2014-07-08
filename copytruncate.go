@@ -1,11 +1,11 @@
 package main
 
 import (
+	"compress/gzip"
+	"flag"
 	"fmt"
 	"io"
-	"compress/gzip"
 	"os"
-	"flag"
 	"time"
 )
 
