@@ -54,7 +54,7 @@ func copyTruncate(nameIn, nameOut string) error {
 	defer gzout.Close()
 
 	// Don't truncate until we've got 10 empty reads in a row
-	for i := 0; i < 1000000; i++ {
+	for i := 0; i < 10; i++ {
 		written, err := io.Copy(gzout, in)
 		if written > 0 {
 			i = 0
