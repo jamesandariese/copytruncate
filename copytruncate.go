@@ -10,6 +10,7 @@ import (
 )
 
 var format = flag.String("format", "2006-02-01", "Time format")
+var silent = flag.Bool("silent", false, "Silent mode. Do not print progress meter.")
 
 func removeUnderlyingFile(name string, file *os.File) {
 	fi, err := file.Stat()
@@ -58,7 +59,9 @@ func copyTruncate(nameIn, nameOut string) error {
 		written, err := io.Copy(gzout, in)
 		if written > 0 {
 			i = 0
-			fmt.Print(".")
+			if *silent == false {
+				fmt.Print(".")
+			}
 		}
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -71,7 +74,9 @@ func copyTruncate(nameIn, nameOut string) error {
 		panic(err)
 	}
 	in.Sync()
-	fmt.Println("Done")
+	if *silent == false {
+		fmt.Println("Done")
+	}
 	return nil
 }
 
